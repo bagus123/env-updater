@@ -4,13 +4,13 @@ CLI utility for update env
 > this CLI can update many .env services with same key-value 
 
 
-How to use
+## How to use
 
-1. install using npm global
+### 1. install using npm global
    ```shell=
    npm i env-updater -g
    ```
-3. create file env_master
+### 2. create file env_master
 
 ```json=
 # this new value will update in your .env, 
@@ -21,7 +21,7 @@ FIELD_B='2'
 FIELD_C='3'
 FIELD_D=1000
 ```
-4. create file config.json
+### 3. create file config.json
 ```json=
 {
     "user": "your_user",
@@ -37,7 +37,7 @@ FIELD_D=1000
     ]
 }
 ```
-6. run env-updater
+### 4. run env-updater
 ```shell=
  env-updater --config '/Users/dev/config.json'
 ```

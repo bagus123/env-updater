@@ -1,6 +1,6 @@
 {
   "name": "env-updater",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "CLI utility for update env",
   "main": "index.js",
   "bin": {
@@ -10,6 +10,12 @@
     "name": "bagus123"
   },
   "license": "MIT",
+  "keywords": [
+    "env-updater",
+    "cli",
+    "env",
+    "ssh"
+  ],
   "dependencies": {
     "commander": "^5.1.0",
     "node-ssh": "^9.0.0"
