@@ -1,7 +1,7 @@
 # env-updater
 
 CLI utility for update env
-> this CLI can update many .env services with same key-value 
+> this CLI can update many .env services with same key 
 
 
 ## How to use
