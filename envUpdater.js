@@ -44,10 +44,12 @@ class EnvUpdater {
             })
 
             rl.on('line', (line) => {
-                const arrLine = line.split('=')
-                const key = arrLine[0]
-                const value = arrLine[1]
-                this.allFields[key] = value
+                if (line.indexOf('=') > -1 && !line.startsWith('#')) {
+                    const arrLine = line.split('=')
+                    const key = arrLine[0]
+                    const value = arrLine[1]
+                    this.allFields[key] = value
+                }
             })
 
             rl.on('close', () => {
