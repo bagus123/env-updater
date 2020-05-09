@@ -1,0 +1,21 @@
+{
+  "name": "env-updater",
+  "version": "1.0.0",
+  "description": "CLI utility for update env",
+  "main": "index.js",
+  "bin": {
+    "env-updater": "index.js"
+  },
+  "author": {
+    "name": "bagus123"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^5.1.0",
+    "node-ssh": "^9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bagus123/env-updater.git"
+  }
+}
