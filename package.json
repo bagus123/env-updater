@@ -1,10 +1,10 @@
 {
   "name": "env-updater",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "CLI utility for update env",
   "main": "index.js",
   "bin": {
-    "env-updater": "index.js"
+    "env-updater": "cli.js"
   },
   "author": {
     "name": "bagus123"
