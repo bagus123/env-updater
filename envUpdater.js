@@ -74,12 +74,14 @@ class EnvUpdater {
 
             let newContent = ''
             rl.on('line', (line) => {
-                const arrLine = line.split('=')
-                const key = arrLine[0]
-                if (this.allFields[key]) {
-                    const value = this.allFields[key]
-                    const field = `${key}=${value}`
-                    line = field
+                if (line.indexOf('=') > -1 && !line.startsWith('#')) {
+                    const arrLine = line.split('=')
+                    const key = arrLine[0]
+                    if (this.allFields[key]) {
+                        const value = this.allFields[key]
+                        const field = `${key}=${value}`
+                        line = field
+                    }
                 }
                 newContent += line + '\n'
             })
