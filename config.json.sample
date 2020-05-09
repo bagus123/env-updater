@@ -1,0 +1,13 @@
+{
+    "user": "your_user",
+    "privateKey": "/Users/dev/.ssh/id_rsa",
+    "envMaster": "/Users/dev/env_master",
+    "services": [
+        {
+            "name": "some_service",
+            "host": "0.0.0.0",
+            "env": "/home/dev/www/some_service/source/.env",
+            "postCommand": "cat /home/dev/www/some_service/source/.env"
+        }
+    ]
+}
