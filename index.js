@@ -27,7 +27,8 @@ async function runUpdater() {
             privateKey: config.privateKey,
             envMaster: config.envMaster,
             envService: service.env,
-            postCommand: service.postCommand
+            preCommand: service.preCommand || '',
+            postCommand: service.postCommand || ''
         }
         const envUpdater = new EnvUpdater(configService)
         await envUpdater.run()

@@ -29,10 +29,18 @@ FIELD_D=1000
     "envMaster": "/Users/dev/env_master",
     "services": [
         {
-            "name": "some_service",
+            "name": "some_service_1",
             "host": "0.0.0.0",
-            "env": "/home/dev/www/some_service/source/.env",
-            "postCommand": "cat /home/dev/www/some_service/source/.env"
+            "env": "/home/dev/www/some_service_1/source/.env",
+            "preCommand": "tail /home/dev/www/some_service_1/source/.env"
+            "postCommand": "tail /home/dev/www/some_service_1/source/.env"
+        },
+        {
+            "name": "some_service_2",
+            "host": "0.0.0.0",
+            "env": "/home/dev/www/some_service_2/source/.env",
+            "preCommand": "tail /home/dev/www/some_service_2/source/.env"
+            "postCommand": "tail /home/dev/www/some_service_2/source/.env"
         }
     ]
 }
@@ -41,7 +49,31 @@ FIELD_D=1000
 ```shell=
  env-updater --config '/Users/dev/config.json'
 ```
-
+## Backup env before update env
+You can do using `preCommand`, for example :
+```json=
+{
+    "user": "your_user",
+    "privateKey": "/Users/dev/.ssh/id_rsa",
+    "envMaster": "/Users/dev/env_master",
+    "services": [
+        {
+            "name": "some_service_1",
+            "host": "0.0.0.0",
+            "env": "/home/dev/www/some_service_1/source/.env",
+            "preCommand": "cd /home/dev/www/some_service_1/source && mkdir -p .env.backup && cp .env .env.backup/.env-$(date '+%Y.%m.%d-%H.%M.%S')",
+            "postCommand": "pm2 reload some_service_1 --update-env"
+        },
+         {
+            "name": "some_service_2",
+            "host": "0.0.0.0",
+            "env": "/home/dev/www/some_service_2/source/.env",
+            "preCommand": "cd /home/dev/www/some_service_2/source && mkdir -p .env.backup && cp .env .env.backup/.env-$(date '+%Y.%m.%d-%H.%M.%S')",
+            "postCommand": "pm2 reload some_service_2 --update-env"
+        }
+    ]
+}
+```
 
 ## Reload service after update env
 You can reload app service after update env using `postCommand` 
@@ -53,10 +85,18 @@ if you using pm2, you can write like this :
     "envMaster": "/Users/dev/env_master",
     "services": [
         {
-            "name": "some_service",
+            "name": "some_service_1",
             "host": "0.0.0.0",
-            "env": "/home/dev/www/some_service/source/.env",
-            "postCommand": "pm2 reload someservice --update-env"
+            "env": "/home/dev/www/some_service_1/source/.env",
+            "preCommand": "tail /home/dev/www/some_service_1/source/.env"
+            "postCommand": "pm2 reload some_service_1 --update-env"
+        },
+         {
+            "name": "some_service_2",
+            "host": "0.0.0.0",
+            "env": "/home/dev/www/some_service_2/source/.env",
+            "preCommand": "tail /home/dev/www/some_service_2/source/.env"
+            "postCommand": "pm2 reload some_service_2 --update-env"
         }
     ]
 }

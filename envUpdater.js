@@ -11,6 +11,7 @@ class EnvUpdater {
         this.privateKey = config.privateKey
         this.envService = config.envService
         this.envMaster = config.envMaster
+        this.preCommand = config.preCommand
         this.postCommand = config.postCommand
         this.ssh = new NodeSSH()
 
@@ -60,9 +61,12 @@ class EnvUpdater {
     }
 
     async _getFile() {
-        await this.ssh.getFile(this.localPathFile, this.envService)
-        return true
-
+        try {
+            await this.ssh.getFile(this.localPathFile, this.envService)
+            return true
+        } catch (error) {
+            throw Error('failed get env file from server')
+        }
     }
 
     async _createNewEnv() {
@@ -95,7 +99,20 @@ class EnvUpdater {
     }
 
     async _putNewEnv() {
-        await this.ssh.putFile(this.localModifiedFile, this.envService)
+        try {
+            await this.ssh.putFile(this.localModifiedFile, this.envService)
+            return true
+        } catch (error) {
+            throw Error('failed put new env to server')
+        }
+    }
+
+    async _preCommand() {
+        if (this.preCommand !== null && this.preCommand !== '') {
+            const result = await this.ssh.execCommand(this.preCommand)
+            console.log(result.stdout)
+            console.log(result.stderr)
+        }
         return true
     }
 
@@ -111,18 +128,24 @@ class EnvUpdater {
     async _cleanUp() {
         fs.unlinkSync(this.localPathFile)
         fs.unlinkSync(this.localModifiedFile)
+        this.ssh.dispose()
         return true
     }
 
     async run() {
-        await this._readEnvMaster()
-        await this._connect()
-        await this._getFile()
-        await this._createNewEnv()
-        await this._putNewEnv()
-        await this._postCommand()
-        await this._cleanUp()
-        return true
+        try {
+            await this._readEnvMaster()
+            await this._connect()
+            await this._getFile()
+            await this._preCommand()
+            await this._createNewEnv()
+            await this._putNewEnv()
+            await this._postCommand()
+            await this._cleanUp()
+            return true
+        } catch (error) {
+            console.error(error)
+        }
     }
 
 }

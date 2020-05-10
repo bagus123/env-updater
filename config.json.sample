@@ -4,10 +4,18 @@
     "envMaster": "/Users/dev/env_master",
     "services": [
         {
-            "name": "some_service",
+            "name": "some_service_1",
             "host": "0.0.0.0",
-            "env": "/home/dev/www/some_service/source/.env",
-            "postCommand": "cat /home/dev/www/some_service/source/.env"
+            "env": "/home/dev/www/some_service_1/source/.env",
+            "preCommand": "tail /home/dev/www/some_service_1/source/.env"
+            "postCommand": "tail /home/dev/www/some_service_1/source/.env"
+        },
+        {
+            "name": "some_service_2",
+            "host": "0.0.0.0",
+            "env": "/home/dev/www/some_service_2/source/.env",
+            "preCommand": "tail /home/dev/www/some_service_2/source/.env"
+            "postCommand": "tail /home/dev/www/some_service_2/source/.env"
         }
     ]
 }
