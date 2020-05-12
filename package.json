@@ -1,6 +1,6 @@
 {
   "name": "env-updater",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "CLI utility for update env",
   "main": "index.js",
   "bin": {

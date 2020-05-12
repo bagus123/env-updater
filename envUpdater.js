@@ -37,7 +37,7 @@ class EnvUpdater {
         return true
     }
 
-    async _readEnvMaster() {
+    _readEnvMaster() {
         return new Promise((resolve, reject) => {
             const rl = readline.createInterface({
                 input: fs.createReadStream(this.envMaster),
@@ -69,7 +69,7 @@ class EnvUpdater {
         }
     }
 
-    async _createNewEnv() {
+    _createNewEnv() {
         return new Promise((resolve, reject) => {
             const rl = readline.createInterface({
                 input: fs.createReadStream(this.localPathFile),
